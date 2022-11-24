@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import VideoList from "./components/VideoList/VideoList";
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const [name, setName] = useState("sophie");
 
   useEffect(() => {
     const requestOptions = {
@@ -16,11 +16,11 @@ function App() {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => setVideos(result.items))
       .catch((error) => console.log("error", error));
   }, []);
 
-  return <h1> Hello</h1>;
+  return <VideoList videos={videos} />;
 }
 
 export default App;
